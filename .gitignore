@@ -1,0 +1,22 @@
+
+# Data
+data/locomo/*.json
+model/*
+
+# relatedworkspace
+relatedwork/
+
+# Large binary / generated files — do not commit
+core/datasets/biomedical/graph.json
+core/datasets/biomedical/design_questions.ipynb
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Logs and temp
+logs/
+*.log
+.env
