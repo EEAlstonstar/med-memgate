@@ -87,7 +87,7 @@ from src.memory.linked_view_system import LinkedViewSystem
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Test LinkedViewSystem (TierMem) on MemoryAgentBench (Concurrent)")
+    parser = argparse.ArgumentParser(description="Test med-memgate on MemoryAgentBench (Concurrent)")
     parser.add_argument("--limit", type=int, default=2, help="Limit number of sessions")
     parser.add_argument("--model", type=str, default="gpt-4.1-mini", help="Model name for fast/slow LLMs")
     parser.add_argument("--run-id", type=str, default=None, help="Run ID (default: auto-generated)")
@@ -142,7 +142,7 @@ def main() -> int:
         from datetime import datetime
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         splits_str = "_".join(splits)
-        run_id = f"tiermem_mab_{splits_str}"
+        run_id = f"medmemgate_mab_{splits_str}"
 
     log_file = f"{run_id}.log"
     log_path = setup_logging(log_file=log_file, log_dir="logs")
@@ -157,7 +157,7 @@ def main() -> int:
         collection_name = f"mem0_linked_{username}_{run_id}"
 
     print(f"\n{'='*60}")
-    print("Testing LinkedViewSystem (TierMem) on MemoryAgentBench (Concurrent)")
+    print("Testing med-memgate on MemoryAgentBench")
     print(f"{'='*60}")
     print(f"Model: {args.model}")
     print(f"Splits: {', '.join(splits)}")
@@ -214,9 +214,9 @@ def main() -> int:
     # 创建系统
     try:
         system = LinkedViewSystem(lv_cfg)
-        print("✓ LinkedViewSystem created successfully")
+        print("✓ med-memgate system created")
     except Exception as e:
-        print(f"✗ Failed to create LinkedViewSystem: {e}")
+        print(f"✗ Failed to create med-memgate system: {e}")
         import traceback
         traceback.print_exc()
         return 1

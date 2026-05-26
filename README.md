@@ -1,6 +1,6 @@
 <div align="center">
 
-# TierMem
+# med-memgate
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -15,7 +15,7 @@
 
 ## Overview
 
-TierMem gives LLM agents long-term memory across extended conversations by maintaining two parallel retrieval paths and routing each query to the most appropriate one:
+med-memgate gives LLM agents long-term memory across extended conversations by maintaining two parallel retrieval paths and routing each query to the most appropriate one:
 
 | Path | Name | Mechanism | Best for |
 |------|------|-----------|----------|
@@ -140,7 +140,7 @@ python test_TierMem_biomedical.py --router-type openai --medical-addendum --run-
 ## Project Structure
 
 ```
-TierMem/
+med-memgate/
 ├── core/
 │   ├── datasets/              # Dataset loaders
 │   │   ├── locomo.py
@@ -160,7 +160,7 @@ TierMem/
 │       └── run_benchmark_multi.py # concurrent session executor
 │
 ├── src/
-│   ├── linked_view/           # TierMem core
+│   ├── linked_view/           # med-memgate core
 │   │   ├── router.py              # BinaryRouter, LLMRouter, ThinkingLLMRouter
 │   │   ├── prompts.py             # all prompt templates + MEDICAL_ROUTER_ADDENDUM
 │   │   ├── summary_index.py       # S-path: Mem0 semantic search
@@ -228,7 +228,7 @@ results/locomo/linked_view/my_run/
 
 ### Medical Router Enhancement
 
-The standard router is domain-agnostic. TierMem adds medical-aware routing rules that push certain query types toward R-path:
+The standard router is domain-agnostic. med-memgate adds medical-aware routing rules that push certain query types toward R-path:
 
 - **Lab value queries** (`creatinine`, `WBC count`, `glucose level`) — exact values needed
 - **Completeness queries** (`all symptoms`, `list all side effects`) — summaries may truncate

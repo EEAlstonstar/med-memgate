@@ -79,7 +79,7 @@ from src.memory.linked_view_system import LinkedViewSystem
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Test LinkedViewSystem (TierMem) on LoCoMo (Concurrent)",
+        description="Test med-memgate on LoCoMo (Concurrent)",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -166,7 +166,7 @@ Examples:
     else:
         from datetime import datetime
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        run_id = f"tiermem_locomo_multi_{timestamp}"
+        run_id = f"medmemgate_locomo_{timestamp}"
 
     log_file = f"{run_id}.log"
     log_path = setup_logging(log_file=log_file, log_dir="logs")
@@ -195,7 +195,7 @@ Examples:
     # router_type == "llm" 不需要额外配置
 
     print(f"\n{'='*60}")
-    print("Testing LinkedViewSystem (TierMem) on LoCoMo (Concurrent)")
+    print("Testing med-memgate on LoCoMo")
     print(f"{'='*60}")
     print(f"Memory System Model: {args.model}")
     print(f"Router Type: {args.router_type}")
@@ -267,9 +267,9 @@ Examples:
     # 创建系统
     try:
         system = LinkedViewSystem(lv_cfg)
-        print("✓ LinkedViewSystem created successfully")
+        print("✓ med-memgate system created")
     except Exception as e:
-        print(f"✗ Failed to create LinkedViewSystem: {e}")
+        print(f"✗ Failed to create med-memgate system: {e}")
         import traceback
         traceback.print_exc()
         return 1

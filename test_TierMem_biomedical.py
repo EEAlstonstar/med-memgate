@@ -83,7 +83,7 @@ from src.memory.linked_view_system import LinkedViewSystem
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Test TierMem on the Biomedical multi-visit dataset",
+        description="Test med-memgate on the Biomedical multi-visit dataset",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
 
@@ -119,7 +119,7 @@ def main() -> int:
         return 1
 
     from datetime import datetime
-    run_id = args.run_id or f"tiermem_bio_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    run_id = args.run_id or f"medmemgate_bio_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
     log_path = setup_logging(f"{run_id}.log")
 
     username = os.getenv("USER", "user")
@@ -171,7 +171,7 @@ def main() -> int:
     }
 
     print(f"\n{'='*60}")
-    print("TierMem – Biomedical Benchmark")
+    print("med-memgate – Biomedical Benchmark")
     print(f"{'='*60}")
     print(f"Model      : {args.model}")
     print(f"Router     : {args.router_type}  medical-addendum={args.medical_addendum}")
@@ -183,7 +183,7 @@ def main() -> int:
 
     try:
         system = LinkedViewSystem(lv_cfg)
-        print("LinkedViewSystem created.")
+        print("med-memgate system created.")
     except Exception as e:
         print(f"Failed to create system: {e}")
         import traceback; traceback.print_exc()
