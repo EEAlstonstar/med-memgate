@@ -93,7 +93,7 @@ def get_mem0_for_session(session_id: str) -> Memory:
     if session_id in _mem0_cache:
         return _mem0_cache[session_id]
 
-    collection_name = f"TierMem_memory_agent_bench_{session_id}"
+    collection_name = f"mmg_memory_agent_bench_{session_id}"
     logger.info(f"Creating mem0 instance for collection: {collection_name}")
 
     config = MemoryConfig(

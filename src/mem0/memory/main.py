@@ -236,15 +236,15 @@ class Memory(MemoryBase):
         capture_event("mem0.init", self, {"sync_type": "sync"})
 
         # ==========================
-        # TierMem: usage tracking hooks
+        # usage tracking hooks
         # ==========================
         # 目标：让上层系统能拿到 mem0.add/search 内部真实的 token usage（LLM + embeddings）
         # 做法：
         # - 在 Memory 实例里维护一个 recorder（线程安全）
         # - 在 __init__ 时 wrap embed() / generate_response()，每次调用读取 provider 的 last_usage/last_latency_ms
         # - 上层（例如 src/linked_view/summary_index.py）在调用 add/search 前 reset(scope)，结束后 finalize 读取
-        self._tiermem_usage = Mem0UsageRecorder()
-        self._tiermem_usage_scope: str = "init"
+        self._mmg_usage = Mem0UsageRecorder()
+        self._mmg_usage_scope: str = "init"
 
         # wrap embedder
         if hasattr(self.embedding_model, "embed"):
@@ -257,13 +257,13 @@ class Memory(MemoryBase):
                 usage = getattr(self.embedding_model, "last_usage", None) or {}
                 provider = getattr(getattr(self.config, "embedder", None), "provider", None)
                 model = getattr(getattr(self.embedding_model, "config", None), "model", None)
-                self._tiermem_usage.record(
+                self._mmg_usage.record(
                     component="embedding",
                     provider=str(provider) if provider is not None else None,
                     model=str(model) if model is not None else None,
                     usage=usage,
                     latency_ms=latency_ms,
-                    extra={"memory_action": memory_action, "scope": self._tiermem_usage_scope},
+                    extra={"memory_action": memory_action, "scope": self._mmg_usage_scope},
                 )
                 return out
 
@@ -280,13 +280,13 @@ class Memory(MemoryBase):
                 usage = getattr(self.llm, "last_usage", None) or {}
                 provider = getattr(getattr(self.config, "llm", None), "provider", None)
                 model = getattr(getattr(self.llm, "config", None), "model", None) or getattr(getattr(self.config.llm, "config", None), "model", None)
-                self._tiermem_usage.record(
+                self._mmg_usage.record(
                     component="llm",
                     provider=str(provider) if provider is not None else None,
                     model=str(model) if model is not None else None,
                     usage=usage,
                     latency_ms=latency_ms,
-                    extra={"scope": self._tiermem_usage_scope},
+                    extra={"scope": self._mmg_usage_scope},
                 )
                 return out
 

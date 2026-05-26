@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Convert biomedical QA pairs (data.json) to TierMem multi-turn session format (sessions.jsonl).
+Convert biomedical QA pairs (data.json) to med-memgate multi-turn session format (sessions.jsonl).
 
 Each QA pair becomes one session with:
   - Multiple "visits" (turns) distributing answer entities across timestamps
@@ -296,7 +296,7 @@ def convert_qa_to_session(qa: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Convert biomedical QA to TierMem session format")
+    parser = argparse.ArgumentParser(description="Convert biomedical QA to med-memgate session format")
     parser.add_argument("--input",  default="core/datasets/biomedical/data.json",
                         help="Path to data.json")
     parser.add_argument("--output", default="core/datasets/biomedical/sessions.jsonl",

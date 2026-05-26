@@ -36,7 +36,7 @@ class MemorySystem(ABC):
     """
     统一的Memory系统接口
     
-    所有baseline（Mem0, MIRIX, LightMem, GAM, RAW+LLM, TierMem）都必须实现这个接口。
+    所有baseline（Mem0, MIRIX, LightMem, GAM, RAW+LLM, med-memgate）都必须实现这个接口。
     """
     
     def __init__(self, config: Optional[Dict[str, Any]] = None):

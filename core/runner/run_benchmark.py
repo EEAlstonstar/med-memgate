@@ -1,7 +1,7 @@
 """
 Unified Benchmark Runner
 
-Run TierMem (LinkedViewSystem) on supported benchmarks.
+Run med-memgate (LinkedViewSystem) on supported benchmarks.
 """
 import argparse
 import json

@@ -32,7 +32,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
 # 确保项目根目录在路径中
-PROJECT_ROOT = Path(__file__).parent.parent.parent  # scripts/router_training -> scripts -> TierMem
+PROJECT_ROOT = Path(__file__).parent.parent.parent  # scripts/router_training -> scripts -> med-memgate
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 

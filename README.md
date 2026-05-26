@@ -102,19 +102,19 @@ All benchmark scripts share a common set of parameters:
 ### LoCoMo
 
 ```bash
-python test_TierMem_locomo_multi.py --limit 10 --max-workers 4
+python test_locomo_multi.py --limit 10 --max-workers 4
 ```
 
 ### LongMemEval
 
 ```bash
-python test_TierMem_longmemeval_multi.py --limit 10 --max-workers 4
+python test_longmemeval_multi.py --limit 10 --max-workers 4
 ```
 
 ### MemoryAgentBench
 
 ```bash
-python test_TierMem_memoryagentbench.py \
+python test_memoryagentbench.py \
   --split Accurate_Retrieval \
   --limit 10 \
   --max-workers 4
@@ -127,11 +127,11 @@ python test_TierMem_memoryagentbench.py \
 python scripts/biomedical/1_convert_to_sessions.py
 
 # Run benchmark
-python test_TierMem_biomedical.py --limit 10 --router-type llm
+python test_biomedical.py --limit 10 --router-type llm
 
 # Compare baseline vs medical-enhanced router
-python test_TierMem_biomedical.py --router-type openai --run-id bio_baseline
-python test_TierMem_biomedical.py --router-type openai --medical-addendum --run-id bio_medical
+python test_biomedical.py --router-type openai --run-id bio_baseline
+python test_biomedical.py --router-type openai --medical-addendum --run-id bio_medical
 ```
 
 ---
@@ -183,10 +183,10 @@ med-memgate/
 │       ├── 4_prepare_medical_sft_data.py  # medical-domain SFT samples
 │       └── 5_eval_router_online.py
 │
-├── test_TierMem_locomo_multi.py
-├── test_TierMem_longmemeval_multi.py
-├── test_TierMem_memoryagentbench.py
-├── test_TierMem_biomedical.py
+├── test_locomo_multi.py
+├── test_longmemeval_multi.py
+├── test_memoryagentbench.py
+├── test_biomedical.py
 └── start_qdrant.sh
 ```
 
@@ -196,10 +196,10 @@ med-memgate/
 
 | Benchmark | Task | Metrics | Script |
 |-----------|------|---------|--------|
-| **LoCoMo** | Long-context conversational memory QA | F1, BLEU-1 | `test_TierMem_locomo_multi.py` |
-| **LongMemEval** | Long-form memory evaluation | F1, Accuracy | `test_TierMem_longmemeval_multi.py` |
-| **MemoryAgentBench** | Multi-split agent memory tasks | F1, Accuracy | `test_TierMem_memoryagentbench.py` |
-| **Biomedical** | Multi-visit doctor-patient recall | F1 | `test_TierMem_biomedical.py` |
+| **LoCoMo** | Long-context conversational memory QA | F1, BLEU-1 | `test_locomo_multi.py` |
+| **LongMemEval** | Long-form memory evaluation | F1, Accuracy | `test_longmemeval_multi.py` |
+| **MemoryAgentBench** | Multi-split agent memory tasks | F1, Accuracy | `test_memoryagentbench.py` |
+| **Biomedical** | Multi-visit doctor-patient recall | F1 | `test_biomedical.py` |
 | **HotPotQA** | Multi-hop reasoning | F1, EM | *(coming soon)* |
 | **HaluMem** | Hallucination detection | Accuracy | *(coming soon)* |
 

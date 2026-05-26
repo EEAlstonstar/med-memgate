@@ -9,7 +9,7 @@ Strategy:
   - first_visit (cat=1) QA → optimal_action = "R"  (temporal precision; summary collapses visits)
   - latest     (cat=2) QA  → optimal_action = "S"  (recent info is likely in the newest summary)
 
-Synthetic summaries simulate what a real TierMem run would retrieve:
+Synthetic summaries simulate what a real med-memgate run would retrieve:
   - For R-path samples: only the LATEST visit's doctor text is "retrieved" (incomplete for complete/first queries)
   - For S-path samples: the latest visit's doctor text is complete enough for the latest-entity query
 

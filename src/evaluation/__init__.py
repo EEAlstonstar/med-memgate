@@ -1,4 +1,4 @@
-"""Evaluation utilities for TierMem project."""
+"""Evaluation utilities for med-memgate project."""
 
 
 

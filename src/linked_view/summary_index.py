@@ -162,10 +162,10 @@ class SummaryIndex:
             # mem0 写入：遵循 mem0.Memory.add(messages, *, user_id, metadata, ...)
             try:
                 # 论文/实验：reset mem0 内部 recorder（如果是本地 Memory）
-                if hasattr(self._mem0, "_tiermem_usage") and hasattr(self._mem0, "_tiermem_usage_scope"):
+                if hasattr(self._mem0, "_mmg_usage") and hasattr(self._mem0, "_mmg_usage_scope"):
                     try:
-                        self._mem0._tiermem_usage_scope = "add"  # type: ignore[attr-defined]
-                        self._mem0._tiermem_usage.reset(scope="mem0.add")  # type: ignore[attr-defined]
+                        self._mem0._mmg_usage_scope = "add"  # type: ignore[attr-defined]
+                        self._mem0._mmg_usage.reset(scope="mem0.add")  # type: ignore[attr-defined]
                     except Exception:
                         pass
                 if infer:
@@ -190,9 +190,9 @@ class SummaryIndex:
                             infer=infer,  # type: ignore[call-arg]
                         )
                 # 读取本次 mem0.add 的真实 usage
-                if hasattr(self._mem0, "_tiermem_usage"):
+                if hasattr(self._mem0, "_mmg_usage"):
                     try:
-                        self.last_mem0_usage = self._mem0._tiermem_usage.finalize()  # type: ignore[attr-defined]
+                        self.last_mem0_usage = self._mem0._mmg_usage.finalize()  # type: ignore[attr-defined]
                     except Exception:
                         self.last_mem0_usage = None
                 logger.info(f"[SummaryIndex] mem0.add success (infer={infer}): {results}")
@@ -201,9 +201,9 @@ class SummaryIndex:
                 try:
                     # 某些版本的mem0可能不支持infer参数，尝试直接存储
                     results = self._mem0.add(raw_chunk, user_id=user_id, metadata=metadata)  # type: ignore[call-arg]
-                    if hasattr(self._mem0, "_tiermem_usage"):
+                    if hasattr(self._mem0, "_mmg_usage"):
                         try:
-                            self.last_mem0_usage = self._mem0._tiermem_usage.finalize()  # type: ignore[attr-defined]
+                            self.last_mem0_usage = self._mem0._mmg_usage.finalize()  # type: ignore[attr-defined]
                         except Exception:
                             self.last_mem0_usage = None
                     logger.info(f"[SummaryIndex] mem0.add success (fallback, infer={infer}): {results}")
@@ -226,18 +226,18 @@ class SummaryIndex:
 
         if self._mem0 is not None:
             try:
-                if hasattr(self._mem0, "_tiermem_usage") and hasattr(self._mem0, "_tiermem_usage_scope"):
+                if hasattr(self._mem0, "_mmg_usage") and hasattr(self._mem0, "_mmg_usage_scope"):
                     try:
-                        self._mem0._tiermem_usage_scope = "search"  # type: ignore[attr-defined]
-                        self._mem0._tiermem_usage.reset(scope="mem0.search")  # type: ignore[attr-defined]
+                        self._mem0._mmg_usage_scope = "search"  # type: ignore[attr-defined]
+                        self._mem0._mmg_usage.reset(scope="mem0.search")  # type: ignore[attr-defined]
                     except Exception:
                         pass
                 logger.info(f"[SummaryIndex] Calling mem0.search: query={query[:50]}..., user_id={user_id}, limit={top_k}")
                 res = self._mem0.search(query=query, user_id=user_id, limit=top_k)
                 logger.info(f"[SummaryIndex] mem0.search succeeded: query={query[:50]}..., result_count={len(res.get('results', [])) if isinstance(res, dict) else len(res) if isinstance(res, list) else 0}")
-                if hasattr(self._mem0, "_tiermem_usage"):
+                if hasattr(self._mem0, "_mmg_usage"):
                     try:
-                        self.last_mem0_usage = self._mem0._tiermem_usage.finalize()  # type: ignore[attr-defined]
+                        self.last_mem0_usage = self._mem0._mmg_usage.finalize()  # type: ignore[attr-defined]
                     except Exception:
                         self.last_mem0_usage = None
             except Exception as exc:

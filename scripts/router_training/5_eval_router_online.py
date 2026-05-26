@@ -322,7 +322,7 @@ class OnlineEvaluator:
             # 与 LinkedViewSystem 保持一致：将 session_id 中的 / 和 \ 替换为 _
             # 确保 collection_name 与写入时一致
             safe_session_id = session_id.replace("/", "_").replace("\\", "_")
-            collection_name = f"TierMem_locomo_{safe_session_id}"
+            collection_name = f"mmg_locomo_{safe_session_id}"
 
             config = MemoryConfig(
                 llm={
@@ -361,7 +361,7 @@ class OnlineEvaluator:
         try:
             # 生成 collection_name 用于调试
             safe_session_id = session_id.replace("/", "_").replace("\\", "_")
-            collection_name = f"TierMem_{benchmark}_{safe_session_id}"
+            collection_name = f"mmg_{benchmark}_{safe_session_id}"
             
             user_id = f"{session_id}:user"
             results = mem0.search(query=query, user_id=user_id, limit=top_k)

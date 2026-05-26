@@ -129,7 +129,7 @@ class SummaryFetcher:
             from src.mem0 import Memory
             from src.mem0.configs.base import MemoryConfig
 
-            collection_name = f"TierMem_{self.benchmark}_{session_id}"
+            collection_name = f"mmg_{self.benchmark}_{session_id}"
 
             config = MemoryConfig(
                 llm={

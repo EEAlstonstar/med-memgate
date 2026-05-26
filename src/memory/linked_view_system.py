@@ -767,13 +767,13 @@ class LinkedViewSystem(MemorySystem):
         mem0_cfg = dict(cfg.get("mem0_config", self._mem0_cfg or {}))
         
         # 为每个 session 创建独立的 Qdrant collection（session-level isolation）
-        # 使用 TierMem 命名格式：TierMem_{benchmark_name}_{session_id}
+        # collection name format: mmg_{benchmark_name}_{session_id}
         safe_session_id = session_id.replace("/", "_").replace("\\", "_")
 
         # 获取 benchmark_name（从配置或实例属性）
         benchmark_name = cfg.get("benchmark_name") or getattr(self, "benchmark_name", "unknown")
-        # 生成 collection 名称：TierMem_{benchmark_name}_{session_id}
-        collection_name = f"TierMem_{benchmark_name}_{safe_session_id}"
+        # 生成 collection 名称：mmg_{benchmark_name}_{session_id}
+        collection_name = f"mmg_{benchmark_name}_{safe_session_id}"
         
         # 更新 mem0_config 中的 collection_name
         if "vector_store" in mem0_cfg and "config" in mem0_cfg["vector_store"]:
@@ -843,8 +843,8 @@ class LinkedViewSystem(MemorySystem):
         
         # 获取 benchmark_name（从配置或实例属性）
         benchmark_name = cfg.get("benchmark_name") or getattr(self, "benchmark_name", "unknown")
-        # 生成 collection 名称：TierMem_{benchmark_name}_{session_id}
-        collection_name = f"TierMem_{benchmark_name}_{safe_session_id}"
+        # 生成 collection 名称：mmg_{benchmark_name}_{session_id}
+        collection_name = f"mmg_{benchmark_name}_{safe_session_id}"
         
         # 更新 mem0_config 中的 collection_name
         if "vector_store" in mem0_cfg and "config" in mem0_cfg["vector_store"]:
